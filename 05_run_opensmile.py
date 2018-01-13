@@ -13,19 +13,15 @@ DATA_PATH = 'test/audio/'
 SMILE_CMD = '%s -C %s -I %s -O %s 2> /dev/null'
 
 fs = os.listdir(DATA_PATH)
+ix = mp.Value('i', 0)
 
 def process_file(f):
+  ix.value += 1
+  print(ix.value, f)
   ff = DATA_PATH + f
   csvpath = 'smile_out/%s.csv' % f
   cmd = SMILE_CMD % (OPENSMILE_PATH, CONF_FILE_PATH, ff, csvpath)
   os.system(cmd)
 
-#pool = mp.Pool(processes = 16)
-#results = [pool.apply(process_file, args = (f,)) for f in fs]
-
-ix = 0
-for f in fs:
-  print(ix, f)
-  process_file(f)
-  ix += 1
-
+pool = mp.Pool(processes = 150)
+pool.map(process_file, fs)
