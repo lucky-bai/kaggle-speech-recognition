@@ -10,8 +10,8 @@ nn_data = pd.read_csv('GCommandsPytorch/nn_output.csv')
 vad_data = vad_data.sort_values(by = ['fname'])
 nn_data = nn_data.sort_values(by = ['fname'])
 
-VAD_THRESHOLD = 0.7
-UNKNOWN_THRESHOLD = -1
+VAD_THRESHOLD = 0.3
+UNKNOWN_THRESHOLD = -0.9
 
 labels = []
 for ix in xrange(len(vad_data)):
