@@ -4,13 +4,13 @@ import pdb
 RECOGNIZED = 'yes no up down left right on off stop go'.split()
 
 vad_data = pd.read_csv('output/max_vads.csv')
-nn_data = pd.read_csv('GCommandsPytorch/nn_output.csv')
+nn_data = pd.read_csv('output/ensemble_of_3.csv')
 
 # Sort everything by label
 vad_data = vad_data.sort_values(by = ['fname'])
 nn_data = nn_data.sort_values(by = ['fname'])
 
-VAD_THRESHOLD = 0.7
+VAD_THRESHOLD = 0.3
 
 labels = []
 for ix in xrange(len(vad_data)):
